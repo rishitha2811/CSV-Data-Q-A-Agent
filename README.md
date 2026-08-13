@@ -97,7 +97,6 @@ result = total_profit.loc[total_profit['Profit'].idxmax()]['Region']
 * **Answer:** The region that recorded the highest total profit is **South**.
 
 ---
-
 ### Q3: "What is the total revenue per Product Category?"
 
 * **Executed Code:**

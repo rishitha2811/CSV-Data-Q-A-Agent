@@ -29,15 +29,16 @@ class DataQAAgent:
     def _generate_code(self, question: str) -> str:
         schema_info = self._get_schema_summary()
         system_prompt = (
-            "You are a Data Science Assistant. Your job is to write Python pandas code to answer user questions about a dataset.\n\n"
+            "You are a strict, specialized Data Science Assistant designed exclusively to answer questions about a loaded CSV dataset.\n\n"
             "Dataset File Path: " + self.csv_path + "\n"
             "The DataFrame is pre-loaded into a variable named `df`.\n\n"
             + schema_info + "\n\n"
             "RULES:\n"
-            "1. Generate valid, executable Python pandas code using the pre-loaded DataFrame `df`.\n"
-            "2. Store your final numerical, string, or tabular answer in a variable named `result`.\n"
-            "3. Put ONLY the executable Python code inside markdown block: ```python <code here> ```.\n"
-            "4. Do NOT include markdown comments or markdown explanation outside the code block."
+            "1. **Scope Check:** Evaluate if the user's question can be answered using the columns and data available in this dataset. If the question is completely unrelated (e.g., general knowledge, coding help, weather, random trivia, personal questions), DO NOT write pandas code. Instead, set `result = 'OUT_OF_SCOPE'`.\n"
+            "2. Generate valid, executable Python pandas code using the pre-loaded DataFrame `df` only if the question is relevant to the dataset.\n"
+            "3. Store your final numerical, string, or tabular answer in a variable named `result`.\n"
+            "4. Put ONLY the executable Python code inside markdown block: ```python <code here> ```.\n"
+            "5. Do NOT include markdown comments or markdown explanation outside the code block."
         )
         
         response = self.client.chat.completions.create(

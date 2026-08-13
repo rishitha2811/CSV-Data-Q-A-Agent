@@ -13,7 +13,6 @@ def main():
     # If the user provided a custom CSV file path in command line, use that instead
     if len(sys.argv) > 1 and os.path.exists(sys.argv[1]):
         csv_path = sys.argv[1]
-
     print("\n" + "="*60)
     print("🤖 DATA Q&A AI AGENT - INTERACTIVE CHAT")
     print("="*60)
