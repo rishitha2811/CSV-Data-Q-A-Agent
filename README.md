@@ -1,7 +1,8 @@
-
 # 📊 CSV Data Q&A AI Agent 
 
-An agentic data inquiry system translates natural language questions into executable Pandas code and calculates exact results in a Python sandbox to eliminate LLM mathematical hallucinations.
+An agentic data inquiry system built for the **ROOMAN AI Challenge (Junior AI Research Associate Selection Round)**. It translates natural language questions into executable Pandas code and calculates exact results in a Python sandbox to eliminate LLM mathematical hallucinations.
+
+---
 
 ## 🎯 1-Sentence Summary
 > "My agent takes a natural language question about a CSV spreadsheet and produces an exact, mathematically computed answer backed by executable Python code execution."
@@ -49,16 +50,16 @@ python app.py
 
 ---
 
-## How Numbers Are Computed (Zero Hallucination Strategy)
+## 🧮 How Numbers Are Computed (Zero Hallucination Strategy)
 
-1. Schema & Preview Analysis: The agent inspects `df.info()` and top sample rows without sending full confidential raw data to context windows.
-2. Deterministic Code Generation: The LLM (`llama-3.3-70b-versatile`) acts strictly as a code generator, converting plain English questions into runnable `pandas` Python code.
-3. Sandbox Execution: The generated code runs in an isolated Python runtime using `exec()`. The mathematical computation happens strictly on local CPU/Memory.
-4. Natural Synthesis:The raw numerical output from `pandas` is fed back to the LLM to format a human-readable explanation with exact cited numbers.
+1. **Schema & Preview Analysis:** The agent inspects `df.info()` and top sample rows without sending full confidential raw data to context windows.
+2. **Deterministic Code Generation:** The LLM (`llama-3.3-70b-versatile`) acts strictly as a code generator, converting plain English questions into runnable `pandas` Python code.
+3. **Sandbox Execution:** The generated code runs in an isolated Python runtime using `exec()`. The mathematical computation happens strictly on local CPU/Memory.
+4. **Natural Synthesis:** The raw numerical output from `pandas` is fed back to the LLM to format a human-readable explanation with exact cited numbers.
 
 ---
 
-##  Deliverables: Sample Questions & Outputs
+## 🧪 Deliverables: Sample Questions & Outputs
 
 Below are the actual test queries executed against `data/sales_data.csv` with exact agent outputs:
 
@@ -192,6 +193,7 @@ result = df_split[df_split['Sales_Amount'] > 1500]
 
 ```
 
+
 * **Computed Result:**
 ```text
   Transaction_ID        Date Region Product_Category  Sales_Amount Units_Sold  Profit
@@ -226,3 +228,14 @@ result = df_march_2025['Profit'].sum()
 
 ---
 
+## Design Tradeoffs & Future Enhancements
+
+| Feature Choice | Advantage | Tradeoff / Limitation |
+| --- | --- | --- |
+| **Code Execution vs. Direct Prompting** | 100% mathematical accuracy; zero numerical hallucination. | Requires runtime syntax checking and error handling. |
+| **Groq (Llama-3.3-70B)** | Sub-second latency; free tier access. | Free API rate limits under heavy batch load. |
+| **CLI / Terminal Interactive Loop** | Zero port/browser dependencies; fast testing for reviewers. | Lacks visual chart plotting (can be extended using `matplotlib`). |
+
+```
+
+---
