@@ -1,6 +1,6 @@
 # 📊 CSV Data Q&A AI Agent 
 
-An agentic data inquiry system built for the **ROOMAN AI Challenge (Junior AI Research Associate Selection Round)**. It translates natural language questions into executable Pandas code and calculates exact results in a Python sandbox to eliminate LLM mathematical hallucinations.
+An agentic data inquiry system that translates natural language questions into executable Pandas code and calculates exact results in a Python sandbox to eliminate LLM mathematical hallucinations.
 
 ---
 
